@@ -89,3 +89,50 @@ function logout() {
         statusChangeCallback(response)
     })
 }
+
+
+// getRequest iTunes API
+function generateSuccessHTMLOutput(response) {
+	return  '<h4>Result</h4>' + 
+	'<h5>Data:</h5>' + 
+	'<pre>' + JSON.stringify(response.data, null, '\t') + '</pre>'; 
+}
+
+function generateErrorHTMLOutput(error) {
+	return  '<h4>Result</h4>' + 
+	'<h5>Message:</h5> ' + 
+	'<pre>' + error.message + '</pre>' +
+	'<h5>Status:</h5> ' + 
+	'<pre>' + error.response.status + ' ' + error.response.statusText + '</pre>' +
+	'<h5>Headers:</h5>' + 
+	'<pre>' + JSON.stringify(error.response.headers, null, '\t') + '</pre>' + 
+	'<h5>Data:</h5>' + 
+	'<pre>' + JSON.stringify(error.response.data, null, '\t') + '</pre>'; 
+}
+
+
+function performGetRequest2() {
+  var resultElement = document.getElementById('getResult2');
+  var todoId = document.getElementById('todoId').value;
+  resultElement.innerHTML = '';
+  var keyword = ['via vallen'] // Seharusnya Data dari facebook
+  let results = []
+  axios.get(`https://itunes.apple.com/search?term=${todoId}`)
+  .then(function (response) {
+      response.data.results.map( data => {
+        $('#getResult2').append(`
+          <p>${data.artistName} : ${data.trackName}</p>
+        `)
+      })
+    // resultElement.innerHTML = generateSuccessHTMLOutput();
+  })
+  .catch(function (error) {
+    console.log(error);
+      // resultElement.innerHTML = generateErrorHTMLOutput(error);
+  });
+}
+
+document.getElementById('todoInputForm').addEventListener('submit', performPostRequest);
+
+
+// End of getRequest iTunes API
