@@ -1,19 +1,22 @@
 const User = require('../models/users');
 const FB = require('fb')
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 	home: function(req, res) {
 		console.log("masuk Home");
-		FB.setAccessToken(req.body.tokenFB);
-  		FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
-			  const musicArr = [];
-			  response.music.data.forEach((music) => {
-				  musicArr.push(music.name);
-			  })
-			  res.status(200).json({
-				  response,
-				  music: musicArr
-			  })
+		FB.setAccessToken(req.headers.token);
+  		FB.api('/me',{fields: ['name', 'gender','email', 'music']} , function(response) {
+			console.log(response.email)
+				User.findOne({ email: response.email }, (err, dataResponse) => {
+				if (err) res.send(err)
+				var token = jwt.sign({ id: dataResponse._id }, 'secret');
+				res.status(200).send({
+					message: 'data success',
+					dataMusic: response.music,
+					TokenJWT: token
+				})
+			})
   		});
 	},
 	
