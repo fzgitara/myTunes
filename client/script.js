@@ -16,7 +16,7 @@
       // .then((data) => {
       //   console.log(data)
       // })
-      $.post('http://localhost:3000/test', {tokenFB: response.authResponse.accessToken}, 
+      $.post('http://localhost:3000/myTunes', {tokenFB: response.authResponse.accessToken}, 
       (data, status) => {
         if(status === 'success') {
           console.log(data)
