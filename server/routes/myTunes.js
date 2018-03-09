@@ -4,7 +4,7 @@ const { home, getUser, createUser } = require('../controllers/users')
 const checkUser = require('../middleware/checkUser')
 
 /* GET users listing. */
-router.post('/', checkUser, home)
+router.post('/', home)
 router.get('/user', getUser)
 router.post('/user', createUser)  
 
