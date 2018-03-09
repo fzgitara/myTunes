@@ -1,32 +1,28 @@
 const User = require('../models/users')
 const { createUser } = require('../controllers/users')
 const FB = require('fb')
+const jwt = require('jsonwebtoken')
 
 function checkUser (req, res, next) {
 	// console.log(Users);
-	FB.setAccessToken(req.body.tokenFB);
+	console.log('token',req.headers)
+	FB.setAccessToken(req.headers.token);
   	FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
-		User.findOne({'email': response.email}, (err, data) => {
+		  console.log(response, 'sdoskdosk')
+		User.findOne({email: response.email}, (err, data) => {
+			console.log('ini data ', data)
 			if(data !== null) {
-				console.log(data);
+				console.log('masuk sini karena udah ada')
 				next()
 			} else {
-				let newUser = {
+				let newUser = new User({
 					name: response.name,
 					email: response.email
-				}
-				
-				User.create(newUser)
-				.then( data => {
-					res.status(201).json ({
-						message: 'Success create new user',
-						users: data
-					})
 				})
-				.catch(err => {
-					console.log(err);
+				newUser.save(function(err, data) {
+					if (err) res.send(err)
+					next()
 				})
-				
 			}
 		})
   	});
