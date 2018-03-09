@@ -6,9 +6,6 @@ function checkUser (req, res, next) {
 	// console.log(Users);
 	FB.setAccessToken(req.body.tokenFB);
   	FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
-		response.music.data.forEach((music) => {
-			console.log(music.name)
-		})
 		User.findOne({'email': response.email}, (err, data) => {
 			if(data !== null) {
 				console.log(data);
