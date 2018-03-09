@@ -4,6 +4,6 @@ const home = require('../controllers/myTunes')
 const user = require('../controllers/users')
 
 /* GET home page. */
-// router.get('/',  )
+router.get('/',  user.login)
 
 module.exports = router;
