@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Facebook Login JavaScript Example</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="container landing_page" style="margin-bottom: 70px">
+    <div class="col-md-12">
+      <div class="row">
+          <div class="col-md-4">
+            <div class="circle"></div>
+          </div>
+          <div class="col-md-4 font-logo">
+            myTunes
+          </div>
+          <div class="col-md-4 login_fb_ui">
+            <div class="login_fb_btn">
+                <div id="fb-root"></div>
+                <fb:login-button scope="public_profile,email,user_likes" onlogin="checkLoginState();">
+                </fb:login-button>
+            </div>
+          </div>  
+      </div>
+    </div>
+    <div class="col-md-12" style="margin-top:15px; padding: 0;">
+        <div class="row">
+          <div class="col-md-4" style="padding-right: 0;">
+            <div class="about_mytunes">
+              <h3>
+                myTunes
+              </h3>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam voluptatum ratione deserunt, corrupti libero neque. Doloribus libero ipsum sed nemo!
+              </p>
+            </div>
+          </div>
+          <div class="col-md-8 padding: 0px;">
+            <div class="welcome_landing_img">
+      
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div class="col-md-12" style="margin-top:40px;text-align:center;height:  150px;">
+        <div class="element"></div>
+        <div class="title_team">
+            Meet Our Team
+          </div>
+      </div>
+      <div class="col-md-12 team_ui">
+        <div class="row">
+          <div class="col-md-3">
+            Chandra Budiman
+          </div>
+          <div class="col-md-3">
+            Ervan Adetya Sukianto
+          </div>
+          <div class="col-md-3">
+            Fachrizal Gita Rahmanda
+          </div>
+          <div class="col-md-3">
+            Gustaf Pahlevi
+          </div>
+        </div>
+      </div>
+
+    <div class="">
+      <button onclick="logout()">LogOut</button>
+    </div>
+      
+
+  </div>
+
+<!-- iTunes -->
+<!-- <div class="container">
+  
+  <div class="panel panel-primary">
+    <div class="panel-heading">GET Request with Paramaters</div>
+    <div class="panel-body">
+      <input type="text" class="form-control" id="todoId" placeholder="Todo ID ..."/><br/>
+      <button class="btn btn-primary" onclick="performGetRequest2()">Get Todos</button>
+      <div class="panel-body" id="getResult2"></div>
+    </div>
+  </div>
+
+</div> -->
+
+
+<!-- End of iTunes -->
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=246539295888893&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="script.js"></script>
+
+<div id="status">
+</div>
+
+</body>
+</html>
+
+
+
