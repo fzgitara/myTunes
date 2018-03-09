@@ -6,9 +6,13 @@ module.exports = {
 		console.log("masuk Home");
 		FB.setAccessToken(req.body.tokenFB);
   		FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
-			  console.log('====>',response.music.data)
+			  const musicArr = [];
 			  response.music.data.forEach((music) => {
-				  console.log(music.name)
+				  musicArr.push(music.name);
+			  })
+			  res.status(200).json({
+				  response,
+				  music: musicArr
 			  })
   		});
 	},
