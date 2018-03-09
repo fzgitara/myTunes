@@ -13,7 +13,7 @@
       axios.post('http://localhost:3000/myTunes', {}, {headers: {token: response.authResponse.accessToken}})
       .then((response) => {
         console.log(response)
-        localStorage.setItem('token' , response.data.TokenJWT )
+      .setItem('token' , response.data.TokenJWT )
       })
       // var xhr = new XMLHttpRequest()
       // xhr.open("POST", "http://localhost:3000/myTunes", true)
