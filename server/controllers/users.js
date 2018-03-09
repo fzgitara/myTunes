@@ -49,5 +49,9 @@ module.exports = {
 		.catch(err => {
 			console.log(err);
 		})
+	},
+
+	login: function (req, res) {
+		console.log('login')
 	}
 }
