@@ -8,17 +8,23 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      testAPI();
-      // axios.post('http://localhost:3000/test', {tokenFB: response.authResponse.accessToken})
-      // .then((data) => {
-      //   console.log(data)
-      // })
-      $.post('http://localhost:3000/myTunes', {tokenFB: response.authResponse.accessToken}, 
-      (data, status) => {
-        if(status === 'success') {
-          console.log(data)
-        }
+      // testAPI();
+      console.log(response.authResponse.accessToken)
+      axios.post('http://localhost:3000/myTunes', {}, {headers: {token: response.authResponse.accessToken}})
+      .then((response) => {
+        console.log(response)
+      .setItem('token' , response.data.TokenJWT )
       })
+      // var xhr = new XMLHttpRequest()
+      // xhr.open("POST", "http://localhost:3000/myTunes", true)
+      // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      // xhr.send(`accessToken=${response.authResponse.accessToken}`)
+      // $.post('http://localhost:3000/myTunes', {tokenFB: response.authResponse.accessToken}, 
+      // (data, status) => {
+      //   if(status === 'success') {
+      //     console.log(data)
+      //   }
+      // })
     } else {
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -74,13 +80,13 @@
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me',{fields: ['name', 'gender', 'email', 'music']}, function(response) {
-      console.log('------->>', response)
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
+    // console.log('Welcome!  Fetching your information.... ');
+    // FB.api('/me',{fields: ['name', 'gender', 'email', 'music']}, function(response) {
+    //   console.log('------->>', response)
+    //   console.log('Successful login for: ' + response.name);
+    //   document.getElementById('status').innerHTML =
+    //     'Thanks for logging in, ' + response.name + '!';
+    // });
   }
 
 function logout() {
