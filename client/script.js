@@ -34,8 +34,11 @@ function statusChangeCallback(response) {
       console.log(response.authResponse.accessToken)
       axios.post('http://localhost:3000/myTunes', {}, {headers: {token: response.authResponse.accessToken}})
       .then((response) => {
+       
         console.log(response)
-      localStorage.setItem('token' , response.data.TokenJWT )
+        localStorage.setItem('token' , response.data.TokenJWT )
+        localStorage.setItem('music', response.data.music)
+        window.location.href = "home.html"
       })
       // var xhr = new XMLHttpRequest()
       // xhr.open("POST", "http://localhost:3000/myTunes", true)
@@ -119,6 +122,8 @@ function logout() {
     FB.logout(function(response) {
         console.log('logout')
         statusChangeCallback(response)
+        localStorage.clear()
+        // window.location.href="index.html"
     })
 }
 
@@ -171,6 +176,8 @@ document.getElementById('todoInputForm').addEventListener('submit', performPostR
 // End of getRequest iTunes API
 
 function validateSinger(name, resName) {
+  console.log(name)
+  // console.log(resName)
   name = name.toLowerCase();
   resName = resName.toLowerCase();
   if(name == resName) {
@@ -183,7 +190,9 @@ function validateSinger(name, resName) {
 function songFilter(name, json) {
   for(let i = 0; i<json.results.length; i++) {
     if(validateSinger(name, json.results[i].artistName)) {
-      // console.log(json.results[i].artistName+' - '+json.results[i].collectionCensoredName)
+      // console.log(name)
+      console.log(json.results[i].artistName+' - '+json.results[i].collectionCensoredName)
+      renderSong(json.results[i])
     } else {
       i=json.length
     }
@@ -191,6 +200,7 @@ function songFilter(name, json) {
 }
 
 function searchSong(singer) {
+  // console.log('-----------',singer)
   fetch(`https://itunes.apple.com/search?term=${singer}`)  /// fetch pattern
   .then (function (data){
     return data.json()
@@ -201,3 +211,30 @@ function searchSong(singer) {
   })
 }
 
+function convertMusic() {
+  let a = localStorage.getItem('music').split(',')
+  console.log(a)
+  // searchSong(a)
+  a.forEach(singer => {
+    // console.log(singer)
+    searchSong(singer)
+  })
+}
+
+
+function renderSong(json) {
+  console.log(json)
+      let template = `
+            <div class="tile is-parent is-2"">
+             
+                    <article class="tile is-child notification is-info">
+                    <p class="title is-5">${json.collectionName}</p>
+                    <p class="subtitle is-6">${json.artistName}</p>
+                    <figure class="image is-1by1">
+                        <img src="${json.artworkUrl100}">
+                    </figure>
+                    <a target="_blank" href='${json.artistViewUrl}'>BUY</a>
+                    </article>
+           </div>`
+        $('.tiles').append(template)
+}

@@ -10,12 +10,23 @@ module.exports = {
 			console.log(response.email)
 				User.findOne({ email: response.email }, (err, dataResponse) => {
 				if (err) res.send(err)
+				
+				const musicArr = [];
+				response.music.data.forEach(musicData => {
+					musicArr.push(musicData.name)
+				})
+
+				console.log('---------------', musicArr)
+
 				var token = jwt.sign({ id: dataResponse._id }, 'secret');
 				res.status(200).send({
 					message: 'data success',
 					dataMusic: response.music,
-					TokenJWT: token
+					TokenJWT: token,
+					music: musicArr
 				})
+
+
 			})
   		});
 	},
