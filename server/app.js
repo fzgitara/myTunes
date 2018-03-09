@@ -53,10 +53,10 @@ app.use('/myTunes', myTunes);
 
 // app.post('/test', (req, res) => {
 //   console.log(req.body)
-//   FB.setAccessToken(req.body.tokenFB);
-//   FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
-//       console.log(response)
-//   });
+  // FB.setAccessToken(req.body.tokenFB);
+  // FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
+  //     console.log(response)
+  // });
 // })
 
 // catch 404 and forward to error handler

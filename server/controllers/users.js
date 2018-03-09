@@ -1,8 +1,16 @@
-const User = require('../models/users')
+const User = require('../models/users');
+const FB = require('fb')
 
 module.exports = {
 	home: function(req, res) {
 		console.log("masuk Home");
+		FB.setAccessToken(req.body.tokenFB);
+  		FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
+			  console.log('====>',response.music.data)
+			  response.music.data.forEach((music) => {
+				  console.log(music.name)
+			  })
+  		});
 	},
 	
 	getUser: function (req, res) {
