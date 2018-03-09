@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const FB = require('fb');
 
 const index = require('./routes/index');
@@ -34,29 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/myTunes', myTunes);
-
-
-//FB Graph test
-// app.get('/test', (req, res) => {
-//   console.log('masuk test')
-//   FB.setAccessToken('EAADgOecnlf0BACzjqZBAK3DMytLudyef9Ub3EchJzCLnLyfXe4Y2W0ZCmnWuu06ppvOUZCZB9Mz95ExzV7ZBaWHUhZBP9HPIExoLxuFXd1Tl8DzYHPnGEBRVO9V14HLWiD7WwjXTZAUCZAMf58pguiwN5McOyGzncq4UqNtZCdjWUjbzUuM2qIJt2SAiSezZCTaXQ0a4X3lHbdzwZDZD"');
-//   FB.api('/me', function (res) {
-//       if(!res || res.error) {
-//        console.log(!res ? 'error occurred' : res.error);
-//        return;
-//       }
-//       console.log(res);
-//   });
-//   res.send('wow')
-// })
-
-// app.post('/test', (req, res) => {
-//   console.log(req.body)
-//   FB.setAccessToken(req.body.tokenFB);
-//   FB.api('/me',{fields: ['name', 'gender','email', 'music']}, function(response) {
-//       console.log(response)
-//   });
-// })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

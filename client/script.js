@@ -1,7 +1,4 @@
- 
-
-
-  // This is called with the results from from FB.getLoginStatus().
+ // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -16,7 +13,7 @@
       // .then((data) => {
       //   console.log(data)
       // })
-      $.post('http://localhost:3000/test', {tokenFB: response.authResponse.accessToken}, 
+      $.post('http://localhost:3000/myTunes', {tokenFB: response.authResponse.accessToken}, 
       (data, status) => {
         if(status === 'success') {
           console.log(data)
